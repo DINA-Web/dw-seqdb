@@ -9,9 +9,9 @@ services:
    ports:
     - 3306:3306
    volumes:
-     - ./mysql_datadir:/var/lib/mysql
-     - ./mysql_autoload:/docker-entrypoint-initdb.d:ro
-     - ./mysql_conf.d:/etc/mysql/conf.d
+     - ./db/mysql_datadir:/var/lib/mysql
+     - ./db/mysql_autoload:/docker-entrypoint-initdb.d:ro
+     - ./db/mysql_conf.d:/etc/mysql/conf.d
   
   seqdb:
    image: dina/seqdb:v3.28.1b

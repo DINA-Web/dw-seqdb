@@ -28,28 +28,45 @@ store the nrm.se.crt- and nrm.se.key-files in the 'certs'-directory
 ## Run the target  'make' <br>
 login with Admin/Admin
 
-# Environment for tomcat
-## Java
-Oracle-Java , version 8 <br>
+# SeqDB version 3.18.1
 
-## Apache Tomcat
-version 7.0.69 <br>
+## The Docker Image is based on ubuntu:16.04
+Image is = dina/seqdb:v3.28.1b
 
-# Environment for database
-## DB
-MySQL, version 5.6 <br>
+## Docker Image 
+
+### JDK
+
+Oracle-Java , version 8
+
+### Tomcat-server 
+version 7.0.69
+
+## database
+Image is =  mysql:5.6
+
+
+<hr> 
+
+# SeqDB version 3.28.1
+
+## The Docker Image is based on openjdk:8
+Image is = dina/seqdb:v3.28.1b
+
+
+### About the Docker Image.
+
+SeqDB is now a runnable jar. <p> 
+**No need** for Tomcat.
+
+
+## database
+Image is =  mysql:5.6
+
+<hr> 
 
 ## for the developer.
-if pushing to hub.docker.com
+push images to hub.docker.com
 
-1. Makefile : set a tag via DOCKERHUB_VER='tag' ( i.e DOCKERHUB_VER=v0.8 )
-2. run 'make build'
-3. try the image 'make up'
-4. push the image :  'make release' 
 
-## how to log in to the docker container
 
-1. docker exec -it seqdbdocker_tomcat_1 bash
-2. docker exec -it seqdbdocker_db_1 mysql -u brf -p
-
-Wherer seqdbdocker_tomcat_1 and seqdbdocker_db_1 are the names of the container

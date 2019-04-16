@@ -40,6 +40,8 @@ Every new release comes from aafc as a ZIP file containing:
 Database is created, no need for a sql-dump from AAFC. <p>
 You need to import xx-tables prior to working with the seqdb <p>
 
+> java -Xmx8g -jar seqdbweb.war -Xmx8g --spring.config.additional-location=/home/s-seqdb/webapps/seqdbconfig.yml
+
 
 
 where 'db' is the container-name (set in the docker-compose.yml)

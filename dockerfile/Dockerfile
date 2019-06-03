@@ -1,7 +1,7 @@
 FROM openjdk:8
 LABEL Author <ingimar.erlingsson@nrm.se>
-LABEL ca.gc.aafc.seqdb="v3.28.1" \ 
-      ca.gc.aafc.seqdb.release-date="2018-03-08"
+LABEL ca.gc.aafc.seqdb="v3.32-SNAPSHOT" \ 
+      ca.gc.aafc.seqdb.release-date="2019-05-20"
 
 RUN apt-get update && apt-get -y upgrade
 

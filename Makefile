@@ -1,5 +1,4 @@
 #! make
-ME=$(USER)
 include .env
 include env/.env.mysql
 TS := $(shell date '+%Y_%m_%d_%H_%M')
@@ -31,12 +30,10 @@ rm-logs:
 	rm -f srv/logs/*.txt
 
 build: 
-	@docker build --no-cache -t ${IMAGE}:${TAG} -f dockerfile/Dockerfile
-	#docker build --no-cache -t dina/seqdb:v3.28.1 .
-
+	@docker build --no-cache -t dina/seqdb:3.32-SNAPSHOT -f dockerfile
 
 release:
-	docker push ${IMAGE}:${TAG}
+	docker push ${IMAGE}
 
 mysqldump:
 	@docker exec shared_seqdb_database sh -c 'exec mysqldump ${MYSQL_DATABASE} -u${MYSQL_USER} -p${MYSQL_PASSWORD}' > ./db-backup/${MYSQL_DATABASE}_${TS}.sql

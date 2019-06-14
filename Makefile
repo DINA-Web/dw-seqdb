@@ -1,4 +1,4 @@
-#! make
+#!make
 include .env
 include env/.env.mysql
 TS := $(shell date '+%Y_%m_%d_%H_%M')
@@ -30,7 +30,7 @@ rm-logs:
 	rm -f srv/logs/*.txt
 
 build: 
-	@docker build --no-cache -t dina/seqdb:3.32-SNAPSHOT -f dockerfile
+	@docker build --no-cache -t {IMAGE} dockerfile
 
 release:
 	docker push ${IMAGE}

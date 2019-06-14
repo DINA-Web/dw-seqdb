@@ -9,7 +9,10 @@ services:
    ports:
       - 5432:5432
    volumes:
-    - db_data_imageservice:/var/lib/postgresql/data
+    #- db_data_imageservice:/var/lib/postgresql/data
+    #- ./postgis/pg_hba.conf:/etc/postgresql/9.6/main/pg_hba.conf
+    - ./customPostgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    
 
   seqdb:
    image: ${IMAGE}

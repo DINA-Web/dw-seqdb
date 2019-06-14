@@ -3,9 +3,35 @@ spring:
   integration.jdbc.initialize-schema: always
 #  Leave datasource commented out when passing values as runtime arguments
   datasource:
-    url: jdbc:mysql://db/seqdbweb?useUnicode=true&amp;characterEncoding=utf-8
+    url: jdbc:postgresql://db/seqdb_prod?useUnicode=true&amp;characterEncoding=utf-8
     username: brf
     password: brf
+  jpa:
+    properties.hibernate:
+      # Provides Spring-managed Hibernate Session.
+      current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+      # Fixes the LazyInitializationException, but may be bad practice
+      # ( https://vladmihalcea.com/the-hibernate-enable_lazy_load_no_trans-anti-pattern/ )
+      enable_lazy_load_no_trans: true
+      # Ehcache enabled to improve Hibernate performance.
+      cache:
+        use_second_level_cache: true
+        use_query_cache: true
+        # Fixes "net.sf.ehcache.CacheException: Another unnamed CacheManager already exists" error
+        # when testing 
+        region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+      # The default schema is only compatible with postgres (not mysql)
+      default_schema: seqdb
+    hibernate:
+      naming:
+        # Naming strategies specified to allow @Column/@Table name property.
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  # False to let Struts handle file uploads.
+  servlet.multipart.enabled: false
+  # Application name used by admin panel
+  application.name: "@pom.artifactId@"
+  
   # Admin panel connection info
   boot.admin.client:
     url: http://localhost:8081/admin
@@ -16,27 +42,29 @@ spring:
         name: Admin
         password: Admin
 
-  mail:
-    protocol: smtp
-    host: smtp.examplehost.com
-    port: 587
-    username: exampleUser
-    password: examplePass
-    from: "Sequence Database <no-reply@seqdb.agr.gc.ca>"
-    properties.mail.smtp.debug: false
-    properties.mail.smtp.auth: true
-    properties.mail.smtp.starttls.enable: true
-    properties.mail.smtp.starttls.required: true
+  #mail:
+  #  protocol: smtp
+  #  host: smtp.examplehost.com
+  #  port: 587
+  #  username: exampleUser
+  #  password: examplePass
+  #  from: "Sequence Database <no-reply@seqdb.agr.gc.ca>"
+  #  properties.mail.smtp.debug: false
+  #  properties.mail.smtp.auth: true
+  #  properties.mail.smtp.starttls.enable: true
+  #  properties.mail.smtp.starttls.required: true
 
-  ldap:
-    urls: exampleServer
-    base: dc=AGR,dc=GC,dc=CA
-    username: exampleUser
-    password: examplePass
-    searchBase: ou=AAFC
-    searchFilter: (&(sAMAccountName={0})(objectclass=person))
+  main.allow-bean-definition-overriding: true
 
-instanceName: NRM
+  #ldap:
+  #  urls: exampleServer
+  #  base: dc=AGR,dc=GC,dc=CA
+  #  username: exampleUser
+  #  password: examplePass
+  #  searchBase: ou=AAFC
+  #  searchFilter: (&(sAMAccountName={0})(objectclass=person))
+
+instanceName: NRM2
 instanceColour: orange
 storageFolder: /var/lib/seqdb/ #/mnt/seqdb
 userDocumentation: https://collab.agr.gc.ca/co/mbb/SitePages/Sequence%20Database%20(SeqDB).aspx

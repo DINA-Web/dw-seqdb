@@ -38,8 +38,8 @@ services:
    #extra_hosts:
    # - "db:0.0.0.0"
 
-volumes:
-  db_data_imageservice:
+#volumes:
+#  db_data_imageservice:
 
 networks:
   default:

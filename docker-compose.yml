@@ -3,17 +3,16 @@ version: '3.3'
 services:
   db:
    image: postgres:9.6
-   container_name: shared_seqdb_database
+   #container_name: shared_seqdb_database
+   container_name: db
    env_file:
-     - ./env/.postgres
+     #- ./env/.postgres
+     - ./env/.env.postgres
    ports:
       - 5432:5432
    volumes:
-    #- db_data_imageservice:/var/lib/postgresql/data
-    #- ./postgis/pg_hba.conf:/etc/postgresql/9.6/main/pg_hba.conf
-    - ./customPostgresql.conf:/var/lib/postgresql/data/postgresql.conf
+     - ./postgres-docker/init_schema.sql:/docker-entrypoint-initdb.d/init_schema.sql
     
-
   seqdb:
    image: ${IMAGE}
    container_name: seqdb
@@ -25,9 +24,19 @@ services:
 
   adminer:
     image: adminer
-    container_name: administer-db
+    container_name: admin-postgres
     ports:
       - 18080:8080
+
+  seqpublic:
+   image: dina/seqdb_ui:3.32b-SNAPSHOT
+   container_name: seqdb_public
+   environment:
+    - VIRTUAL_HOST=seqpublic.nrm.se
+   #external_links: 
+   # - db:db
+   #extra_hosts:
+   # - "db:0.0.0.0"
 
 volumes:
   db_data_imageservice:

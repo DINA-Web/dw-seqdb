@@ -17,7 +17,9 @@ db-backup/**
 
 # passwords
 env/.env.postgres
-
+env/.env.mysql
+env/.postgres
+.env.org
 
 # log-files
 srv/logs/*log

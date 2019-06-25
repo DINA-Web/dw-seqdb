@@ -1,6 +1,5 @@
 #!make
 include .env
-include env/.env.mysql
 TS := $(shell date '+%Y_%m_%d_%H_%M')
 
 all: up
@@ -10,6 +9,10 @@ up:
 	docker-compose up -d db 
 	sleep 4
 	docker-compose up -d seqdb
+
+up-extra:
+	docker-compose -f docker-compose.testing.yml up -d adminer
+	docker-compose -f docker-compose.testing.yml up -d seqpublic
 
 test-curl:
 	curl -L http://seqdb.nrm.se/login.js
@@ -34,24 +37,3 @@ build:
 
 release:
 	docker push ${IMAGE}
-
-mysqldump:
-	@docker exec shared_seqdb_database sh -c 'exec mysqldump ${MYSQL_DATABASE} -u${MYSQL_USER} -p${MYSQL_PASSWORD}' > ./db-backup/${MYSQL_DATABASE}_${TS}.sql
-
-mysqlimport:
-		@docker exec shared_seqdb_database sh -c 'exec mysql -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE}' < ./db-backup/seqdb-import.sql
-
-#db-import:
-#	@docker exec shared_seqdb_database sh -c 'exec mysql  -u${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE}' < ./customization/seqdbweb_2019_03_11_11_13-before_import.sql
-
-
-# docker exec shared_seqdb_database sh -c 'exec mysql seqdbweb -ubrf -pbrf' < ./customization/seqdbweb_2019_03_11_11_13-before_import.sql
-## conventient
-# $ docker-compose run --rm seqdb bash
-
-# java -Xmx8g -jar seqdbweb.war -Xmx8g --spring.config.additional-location=./seqdbconfig.yml
-# seqdb-docker$ docker build -t openjdk:ingimar.2 dockerfile
-
-#docker exec shared_seqdb_database sh -c 'exec mysql -ubrf -pbrf seqdbweb' < ./db-backup/seqdb-import.sql
-# docker exec -i shared_seqdb_databaser mysql -ubrf -pbrf seqdbweb < ./db-backup/seqdb-import_with-settings.sql
-

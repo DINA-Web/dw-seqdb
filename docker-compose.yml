@@ -6,7 +6,6 @@ services:
    #container_name: shared_seqdb_database
    container_name: db
    env_file:
-     #- ./env/.postgres
      - ./env/.env.postgres
    ports:
       - 5432:5432
@@ -29,14 +28,11 @@ services:
       - 18080:8080
 
   seqpublic:
-   image: dina/seqdb_ui:3.32b-SNAPSHOT
-   container_name: seqdb_public
+   #image: dina/seqdb_ui:3.32b-SNAPSHOT
+   image: dina/seqdb_ui:3.32f
+   container_name: seqpublic
    environment:
     - VIRTUAL_HOST=seqpublic.nrm.se
-   #external_links: 
-   # - db:db
-   #extra_hosts:
-   # - "db:0.0.0.0"
 
 #volumes:
 #  db_data_imageservice:

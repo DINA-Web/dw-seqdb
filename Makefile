@@ -10,6 +10,9 @@ up:
 	sleep 4
 	docker-compose up -d seqdb
 
+insert:
+	./bin/insert.sh
+
 up-extra:
 	docker-compose -f docker-compose.testing.yml up -d adminer
 	docker-compose -f docker-compose.testing.yml up -d seqpublic

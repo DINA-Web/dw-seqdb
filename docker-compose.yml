@@ -3,7 +3,7 @@ version: '3.3'
 services:
   db:
    image: postgres:9.6
-   #container_name: shared_seqdb_database
+   #container_name: shared-db
    container_name: db
    env_file:
      - ./env/.env.postgres
@@ -20,19 +20,6 @@ services:
      - VIRTUAL_PORT=8080
    links:
      - db:db
-
-  adminer:
-    image: adminer
-    container_name: admin-postgres
-    ports:
-      - 18080:8080
-
-  seqpublic:
-   #image: dina/seqdb_ui:3.32b-SNAPSHOT
-   image: dina/seqdb_ui:3.32f
-   container_name: seqpublic
-   environment:
-    - VIRTUAL_HOST=seqpublic.nrm.se
 
 #volumes:
 #  db_data_imageservice:

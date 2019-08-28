@@ -21,6 +21,7 @@ Verify-db:
 4. -> OK or not ? 
 
 Additional db setup: 
+
 5. seqdb_prod=# REVOKE CONNECT ON DATABASE seqdb_prod FROM PUBLIC;
 7. seqdb_prod=# REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 

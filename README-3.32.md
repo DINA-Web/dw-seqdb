@@ -19,6 +19,8 @@ Verify-db:
 2. login to the database: 'psql -d seqdb_prod -U brf'
 3. seqdb_prod=# \dt seqdb.* 
 4. -> OK or not ? 
+
+Additional db setup: 
 5. seqdb_prod=# REVOKE CONNECT ON DATABASE seqdb_prod FROM PUBLIC;
 7. seqdb_prod=# REVOKE CREATE ON SCHEMA public FROM PUBLIC;
 
@@ -61,6 +63,7 @@ Able to add a user or not ?
 ***
 verify 'Genotype'-functionality 
 1. press the 'Genotype-link' 
+
 ***
 
 

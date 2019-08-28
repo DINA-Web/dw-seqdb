@@ -3,14 +3,15 @@ version: '3.3'
 services:
   db:
    image: postgres:9.6
-   #container_name: shared-db
-   container_name: db
+   container_name: shared_db
+   #container_name: db
    env_file:
      - ./env/.env.postgres
    ports:
       - 5432:5432
    volumes:
      - ./postgres-docker/init_schema.sql:/docker-entrypoint-initdb.d/init_schema.sql
+     - db_data_psql:/var/lib/postgresql/data
     
   seqdb:
    image: ${IMAGE}
@@ -21,8 +22,8 @@ services:
    links:
      - db:db
 
-#volumes:
-#  db_data_imageservice:
+volumes:
+  db_data_psql:
 
 networks:
   default:

@@ -22,6 +22,7 @@ env/.postgres
 .env.org
 
 # log-files
+*.log
 srv/logs/*log
 srv/logs/*txt
 

@@ -1,0 +1,21 @@
+version: '3.7'
+
+services: 
+  adminer:
+    image: adminer:4.7.3-standalone
+    container_name: admin-postgres
+    environment:
+    - VIRTUAL_HOST=seqdb-admin.nrm.se
+    ports:
+      - 18080:8080
+
+  seqpublic:
+   image: dina/seqdb_ui:3.32f
+   container_name: seqpublic
+   environment:
+    - VIRTUAL_HOST=seqpublic-tst.nrm.se
+
+networks:
+  default:
+    external:
+       name: proxy-docker_default

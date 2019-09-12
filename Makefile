@@ -1,39 +1,26 @@
 #!make
 include .env
-TS := $(shell date '+%Y_%m_%d_%H_%M')
 
 all: up
 
 up: 
 	@echo "Obs, you need to run a proxy"
-	docker-compose up -d db 
+	docker-compose up -d database 
 	sleep 4
 	docker-compose up -d seqdb
 
-insert:
-	./bin/insert.sh
-
 up-extra:
-	docker-compose -f docker-compose.testing.yml up -d adminer
-	docker-compose -f docker-compose.testing.yml up -d seqpublic
+	docker-compose -f docker-compose.tools.yml up -d adminer
+	docker-compose -f docker-compose.tools.yml up -d seqpublic
+
+load-tar:
+	docker load -i seqdb_img_3_35.tar
 
 test-curl:
 	curl -L http://seqdb.nrm.se/login.js
 
 test-browser:
 	xdg-open https://seqdb.nrm.se/login.jsp &
-
-clean: stop rm rm-logs
-
-stop:
-	docker-compose stop
-
-rm:
-	docker-compose rm -vf
-
-rm-logs:
-	rm -f srv/logs/*.log
-	rm -f srv/logs/*.txt
 
 build: 
 	@docker build --no-cache -t {IMAGE} dockerfile

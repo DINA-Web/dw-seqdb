@@ -1,7 +1,7 @@
 spring:
   # Creates integration framework tables ***This will drop the current integration tables***
   integration.jdbc.initialize-schema: always
-#  Leave datasource commented out when passing values as runtime arguments
+#  Leave datasource commented out when passing values as runtime arguments , 'db' is the alias used in the docker-compose.yml-file
   datasource:
     url: jdbc:postgresql://db/seqdb_prod?useUnicode=true&amp;characterEncoding=utf-8
     username: brf

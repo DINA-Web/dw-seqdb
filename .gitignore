@@ -34,3 +34,6 @@ dockerfile/*.war
 customization/*zip
 customization/*war
 customization/*xml
+
+#
+*.tar

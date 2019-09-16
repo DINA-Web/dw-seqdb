@@ -9,11 +9,18 @@ services:
     ports:
       - 18080:8080
 
-  seqpublic:
-   image: dina/seqdb_ui:3.32f
-   container_name: seqpublic
-   environment:
-    - VIRTUAL_HOST=seqpublic-tst.nrm.se
+  public-ui:
+    image: seqdb-public-ui:3.35
+    ports:
+      - "8081:8080"
+    container_name: seqpublic
+    environment:
+      VIRTUAL_HOST: seqpublic-lab.nrm.se
+      spring.datasource.url: jdbc:postgresql://database/seqdb_prod?currentSchema=seqdb
+      spring.datasource.username: seqdb_webapp
+      spring.datasource.password: changeme
+      spring.liquibase.enabled: "false" 
+
 
 networks:
   default:

@@ -18,7 +18,7 @@ services:
    ports:
        - "8080:8080" 
    environment:
-      VIRTUAL_HOST: seqdb-lab.nrm.se
+      VIRTUAL_HOST: seqdb-beta.dina-web.net
       spring.datasource.url: jdbc:postgresql://database/seqdb_prod?currentSchema=seqdb
       spring.datasource.username: seqdb_webapp
       spring.datasource.password: changeme

@@ -85,3 +85,15 @@ verify 'Genotype'-functionality
 ## Testing on your local machine
 remember to add URL found in docker-compose.yml  to your /etc/hosts file...
 as in '127.0.0.1 seqdb.nrm.se'
+
+### testing
+ping seqdb-beta2.dina-web.net
+ping seqdb-beta.dina-web.net
+
+# docker
+
+## remove volume
+docker volume rm seqdb-docker_db_data_psql
+
+
+

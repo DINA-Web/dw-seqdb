@@ -13,7 +13,9 @@ services:
    image: dina/seqdb_ui:3.32f
    container_name: seqpublic
    environment:
-    - VIRTUAL_HOST=seqpublic-tst.nrm.se
+    - VIRTUAL_HOST=seqpublic-beta.dina-web.net
+   extra_hosts:
+    - "db:68.183.220.212"
 
 networks:
   default:

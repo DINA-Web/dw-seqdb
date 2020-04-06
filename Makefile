@@ -8,6 +8,10 @@ up:
 	docker-compose up -d database 
 	sleep 4
 	docker-compose up -d seqdb
+	docker-compose up -d public-ui 
+
+ps:
+	@docker-compose ps
 
 up-extra:
 	docker-compose -f docker-compose.tools.yml up -d adminer
@@ -27,3 +31,6 @@ build:
 
 release:
 	docker push ${IMAGE}
+
+# local machine
+# https://seqdb-lab.nrm.se and https://seqpublic-lab.nrm.se/ 

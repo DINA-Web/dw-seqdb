@@ -9,14 +9,6 @@ services:
     ports:
       - 18080:8080
 
-  seqpublic:
-   image: dina/seqdb_ui:3.32f
-   container_name: seqpublic
-   environment:
-    - VIRTUAL_HOST=seqpublic-beta.dina-web.net
-   extra_hosts:
-    - "db:68.183.220.212"
-
 networks:
   default:
     external:

@@ -1,0 +1,28 @@
+version: '3.7'
+
+services: 
+  adminer:
+    image: adminer:4.7.3-standalone
+    container_name: admin-postgres
+    environment:
+    - VIRTUAL_HOST=seqdb-admin.nrm.se
+    ports:
+      - 18080:8080
+
+  public-ui:
+    image: seqdb-public-ui:3.35
+    ports:
+      - "8081:8080"
+    container_name: seqpublic
+    environment:
+      VIRTUAL_HOST: seqpublic-lab.nrm.se
+      spring.datasource.url: jdbc:postgresql://database/seqdb_prod?currentSchema=seqdb
+      spring.datasource.username: seqdb_webapp
+      spring.datasource.password: changeme
+      spring.liquibase.enabled: "false" 
+
+
+networks:
+  default:
+    external:
+       name: proxy-docker_default
